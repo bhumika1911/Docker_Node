@@ -42,9 +42,7 @@ const getStudentById=(req,res)=>{
 
 const addStudent = (req, res) => {
     const { fullName, email, age, dob } = req.body;
-    // No need to check for existing email, as it's optional in the form
-
-    // Add student to DB
+    
     pool.query(
         'INSERT INTO students (name, email, age, DOB) VALUES ($1, $2, $3, $4)',
         [fullName, email, age, dob],
