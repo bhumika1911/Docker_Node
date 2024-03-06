@@ -1,25 +1,23 @@
 version: '3.8'
 services:
     app:
-        build: .
+        build:
+            dockerfile: Dockerfile
         depends_on:
-           
             - postgres
-        ports:
-            - "7000:7000"
         volumes:
-           
             - ./:/usr/src/app/
+            - '/usr/src/app/node_modules'
+        ports:
+            - "3000:3000"
     postgres:
-        image: postgres:14.1-alpine
+        image: postgres:latest
         restart: always
+        ports:
+            - "5432:5432"
         environment:
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=bhumigres
             - POSTGRES_DB=students
-        ports:
-            - "5432:5432"
         volumes:
-            - ./database-seed.sql:/docker-entrypoint-initdb.d/database-seed.sql
-
-  
+            - './init:/docker-entrypoint-initdb.d/'
