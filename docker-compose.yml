@@ -4,10 +4,10 @@ services:
         build:
             dockerfile: Dockerfile
         depends_on:
-            - postgres
-        volumes:
-            - ./:/usr/src/app/
-            - '/usr/src/app/node_modules'
+            - postgres  
+        # volumes:
+        #     - ./:/usr/src/app/
+        #     - '/usr/src/app/node_modules'
         ports:
             - "3000:3000"
     postgres:
@@ -20,4 +20,4 @@ services:
             - POSTGRES_PASSWORD=bhumigres
             - POSTGRES_DB=students
         volumes:
-            - './init:/docker-entrypoint-initdb.d/'
+            - './init:/docker-entrypoint-initdb.d/init.sql'
